@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Yu | Business Analyst</title>
+<script>document.documentElement.classList.add('js')</script>
 <meta name="description" content="Victor Yu, business analyst in process improvement and automation. BBA in Operations and MIS, SFU Beedie.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js')</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ffffff;
@@ -89,14 +89,10 @@
   nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
   .logo { font-weight: 700; font-size: 17px; color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
   nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
-  nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap; display: inline-block; padding: 12px 0; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap; display: inline-block; padding: 12px 0; line-height: 20px; }
   nav a:hover { color: var(--ink); }
-  @media (max-width: 560px) {
-    nav ul { gap: 12px; }
-    nav a { font-size: 13px; }
-    footer a { display: inline-block; padding: 9px 0; }
-  }
-  @media (max-width: 420px) { .logo { display: none; } nav .wrap { justify-content: center; } }
+  @media (max-width: 560px) { nav ul { gap: 14px; } nav a { font-size: 13px; } }
+  @media (max-width: 420px) { nav .logo { display: none; } nav ul { gap: 16px; } }
 
   .hero { padding: 96px 0 56px; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: center; }
   .hero::before { content: ""; position: absolute; left: 50%; width: 100vw; transform: translateX(-50%); top: -40px; height: 460px; z-index: -1;
@@ -148,7 +144,7 @@
   .chip { border: 1px solid var(--line); border-radius: 6px; padding: 5px 12px; font-size: 14px; color: var(--muted); }
 
   .js .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
-  .reveal.in { opacity: 1; transform: none; }
+  .js .reveal.in { opacity: 1; transform: none; }
 
   footer { padding: 48px 0 64px; border-top: 1px solid var(--line); }
   footer p { color: var(--muted); margin-bottom: 14px; }
@@ -170,8 +166,65 @@
     background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); z-index: -1; }
   .band section { border-top: none; }
   .band + section { border-top: none; }
-  .case figure img { max-width: 100%; }
   section p, ul.points, .lede, footer p { max-width: 68ch; }
+  .case p { max-width: none; }
+  .case figure img { max-width: 100%; }
+  @media (max-width: 560px) { footer a { display: inline-block; padding: 10px 0; line-height: 24px; } }
+
+  /* MISA showcase panel: the one branded block on the page */
+  .misa { position: relative; overflow: hidden; background: #252C9E; color: #FCFCFF; border-radius: 24px; padding: 40px; margin-bottom: 48px;
+    font-family: "DM Sans", system-ui, sans-serif; }
+  .misa > *:not(.misa-deco) { position: relative; z-index: 1; }
+  .misa-deco { position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
+  .misa-deco.d1 { width: 260px; height: 260px; right: -90px; top: -110px; background: #9295F5; opacity: .28; }
+  .misa-deco.d2 { width: 120px; height: 120px; right: 120px; top: -60px; border: 14px solid #A7D6FF; opacity: .18; }
+  .misa-deco.d3 { width: 220px; height: 220px; left: -110px; bottom: -90px; background: #A7D6FF; opacity: .14; }
+  .misa-deco.d4 { width: 70px; height: 70px; left: 46%; bottom: 40%; background: #9295F5; opacity: .16; border-radius: 22px; transform: rotate(18deg); }
+  .misa-logo { display: block; width: 150px; height: auto; filter: brightness(0) invert(1); margin: 0 0 28px; }
+  .misa h3 { font-family: Poppins, system-ui, sans-serif; font-weight: 900; font-size: clamp(32px, 5vw, 44px); line-height: 1.05; letter-spacing: -.02em; color: #FCFCFF; margin: 0 0 10px; }
+  .misa .misa-meta { font-size: 16px; color: #A7D6FF; margin: 0 0 32px; max-width: none; font-weight: 500; }
+  .misa-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0 0 32px; padding: 0; list-style: none; }
+  .misa-stats li { background: rgba(252,252,255,.07); border: 1px solid rgba(167,214,255,.22); border-radius: 18px; padding: 18px 16px 16px; }
+  .misa-stats b { display: block; font-family: Poppins, system-ui, sans-serif; font-weight: 900; font-size: clamp(34px, 5vw, 46px); line-height: 1; letter-spacing: -.03em; color: #A7D6FF; margin-bottom: 10px; }
+  .misa-stats span { display: block; font-size: 16px; line-height: 1.4; color: #FCFCFF; }
+  .misa-points { margin: 0 0 36px; padding-left: 22px; font-size: 17px; line-height: 1.6; color: #FCFCFF; max-width: 68ch; }
+  .misa-points li { margin-bottom: 10px; }
+  .misa-points li::marker { color: #A7D6FF; }
+  .misa figure { margin: 0; }
+  .misa-collage { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; padding: 6px; }
+  .misa-tile { position: relative; margin: 0; border: 4px solid #FCFCFF; border-radius: 16px; overflow: hidden; background: #1B2296;
+    box-shadow: 0 10px 24px -12px rgba(15,26,58,.7); transform: rotate(var(--tilt, 0deg)); transition: transform .3s ease, box-shadow .3s ease; }
+  .misa-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; max-width: none; border: 0; border-radius: 0; }
+  .misa-tile:hover { transform: rotate(0deg) translateY(-6px) scale(1.02); box-shadow: 0 18px 30px -12px rgba(15,26,58,.8); z-index: 2; }
+  .t-org { grid-column: span 5; --tilt: -1.5deg; }
+  .t-grp { grid-column: span 3; aspect-ratio: 3 / 4; --tilt: 1.5deg; }
+  .t-evt { grid-column: span 4; --tilt: -1deg; }
+  .t-hea, .t-sta, .t-cas { grid-column: span 4; aspect-ratio: 3 / 2; }
+  .t-hea { --tilt: 1.2deg; }
+  .t-sta { --tilt: -1.5deg; }
+  .t-cas { --tilt: 1deg; }
+  .t-org img { object-position: 58% 50%; }
+  .t-grp img { object-position: 50% 72%; }
+  .t-evt img { object-position: 50% 78%; }
+  .misa figcaption { color: #D6D6F3; font-size: 16px; margin-top: 18px; }
+  @media (max-width: 640px) {
+    .misa { padding: 22px; border-radius: 20px; }
+    .misa-logo { width: 130px; margin-bottom: 22px; }
+    .misa-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .misa-stats li { padding: 14px 12px; }
+    .misa-stats b { font-size: 34px; }
+    .misa-points { font-size: 16px; padding-left: 20px; }
+    .misa-collage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 4px; }
+    .misa-tile { border-radius: 14px; }
+    .t-org, .t-hea { grid-column: span 2; aspect-ratio: 3 / 2; }
+    .t-grp, .t-evt { grid-column: span 1; aspect-ratio: 3 / 4; }
+    .t-sta, .t-cas { grid-column: span 1; aspect-ratio: 4 / 3; }
+    .t-grp img { object-position: 50% 68%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .misa-tile { transform: none; transition: none; }
+    .misa-tile:hover { transform: none; }
+  }
   nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 </style>
 </head>
@@ -353,15 +406,37 @@
 
   <section id="leadership" class="reveal">
     <h2>Leadership</h2>
-    <div class="job">
-      <h3>Vice President, SFU Management Information Systems Association</h3>
-      <p class="meta">April 2026 to present</p>
-      <ul class="points">
+    <div class="misa">
+      <span class="misa-deco d1" aria-hidden="true"></span>
+      <span class="misa-deco d2" aria-hidden="true"></span>
+      <span class="misa-deco d3" aria-hidden="true"></span>
+      <span class="misa-deco d4" aria-hidden="true"></span>
+      <img class="misa-logo" src="images/misa-logo.png" alt="MISA logo" width="600" height="169" loading="lazy">
+      <h3>Vice President</h3>
+      <p class="misa-meta">SFU Management Information Systems Association · April 2026 to present</p>
+      <ul class="misa-stats">
+        <li><b>10</b><span>directors and their teams</span></li>
+        <li><b>60+</b><span>club members</span></li>
+        <li><b>250+</b><span>students connected with 80 industry professionals</span></li>
+        <li><b>$5K</b><span>in event funding secured, up to $5,000, a 25% increase</span></li>
+      </ul>
+      <ul class="misa-points">
         <li>Oversee 10 directors and their teams in a club of 60+ members running four flagship events.</li>
         <li>Pitched the club's plan to SFU Beedie and secured up to $5,000 in event funding, a 25% increase.</li>
         <li>Connected 250+ students with 80 industry professionals through networking nights, panels, workshops and hackathons, including PMBC 2026.</li>
         <li>Built onboarding for new directors, including role documents for Corporate Relations and Strategy.</li>
       </ul>
+      <figure>
+        <div class="misa-collage">
+          <div class="misa-tile t-org"><img src="images/pmbc-organizers.jpg" alt="Victor Yu, second from left in a white shirt and striped tie, with three other organizers under silver PMBC balloons" width="1400" height="933" loading="lazy"></div>
+          <div class="misa-tile t-grp"><img src="images/pmbc-group.jpg" alt="PMBC 2026 participants and organizers holding certificates, with Victor Yu kneeling in the front row in a white shirt and striped tie" width="787" height="1400" loading="lazy"></div>
+          <div class="misa-tile t-evt"><img src="images/misa-event-group.jpg" alt="A large group of MISA members posing together after a club event" width="1050" height="1400" loading="lazy"></div>
+          <div class="misa-tile t-hea"><img src="images/misa-hearts.jpg" alt="MISA members making heart shapes with their hands in a group photo" width="1400" height="933" loading="lazy"></div>
+          <div class="misa-tile t-sta"><img src="images/misa-segal-stairs.jpg" alt="MISA members gathered on the staircase at SFU's Segal Graduate School of Business" width="1400" height="933" loading="lazy"></div>
+          <div class="misa-tile t-cas"><img src="images/misa-team-casual.jpg" alt="Six MISA members relaxing on chairs with pizza at a team social" width="1400" height="933" loading="lazy"></div>
+        </div>
+        <figcaption>PMBC 2026, team socials and club events with MISA.</figcaption>
+      </figure>
     </div>
     <div class="job speaking">
       <h3>Peer panel speaker, BUS 300</h3>
