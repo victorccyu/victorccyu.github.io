@@ -99,7 +99,7 @@
     background: radial-gradient(60% 70% at 15% 20%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 70%),
                 radial-gradient(50% 60% at 85% 10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%); }
   .headshot { width: 200px; height: 200px; border-radius: 16px; object-fit: cover; background: var(--panel); border: 1px solid var(--line); }
-  @media (max-width: 640px) { .hero { grid-template-columns: minmax(0, 1fr); } .headshot { width: 140px; height: 140px; order: -1; } }
+  @media (max-width: 640px) { .hero { grid-template-columns: minmax(0, 1fr); } .headshot { width: 160px; height: 160px; order: -1; } }
   .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-2); margin: 0 0 14px; }
   h1 { font-size: clamp(38px, 6.5vw, 56px); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 20px; font-weight: 700; }
   .lede { font-size: 19px; color: var(--muted); max-width: 620px; margin: 0 0 32px; }
@@ -166,7 +166,7 @@
     background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); z-index: -1; }
   .band section { border-top: none; }
   .band + section { border-top: none; }
-  section p, ul.points, .lede, footer p { max-width: 68ch; }
+  section p, ul.points, .lede, footer p { max-width: 62ch; }
   .case p { max-width: none; }
   .case figure img { max-width: 100%; }
   @media (max-width: 560px) { footer a { display: inline-block; padding: 10px 0; line-height: 24px; } }
@@ -187,7 +187,7 @@
   .misa-stats li { background: rgba(252,252,255,.07); border: 1px solid rgba(167,214,255,.22); border-radius: 18px; padding: 18px 16px 16px; }
   .misa-stats b { display: block; font-family: Poppins, system-ui, sans-serif; font-weight: 900; font-size: clamp(34px, 5vw, 46px); line-height: 1; letter-spacing: -.03em; color: #A7D6FF; margin-bottom: 10px; }
   .misa-stats span { display: block; font-size: 16px; line-height: 1.4; color: #FCFCFF; }
-  .misa-points { margin: 0 0 36px; padding-left: 22px; font-size: 17px; line-height: 1.6; color: #FCFCFF; max-width: 68ch; }
+  .misa-points { margin: 0 0 36px; padding-left: 22px; font-size: 17px; line-height: 1.6; color: #FCFCFF; max-width: 62ch; }
   .misa-points li { margin-bottom: 10px; }
   .misa-points li::marker { color: #A7D6FF; }
   .misa figure { margin: 0; }
@@ -196,16 +196,15 @@
     box-shadow: 0 10px 24px -12px rgba(15,26,58,.7); transform: rotate(var(--tilt, 0deg)); transition: transform .3s ease, box-shadow .3s ease; }
   .misa-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; max-width: none; border: 0; border-radius: 0; }
   .misa-tile:hover { transform: rotate(0deg) translateY(-6px) scale(1.02); box-shadow: 0 18px 30px -12px rgba(15,26,58,.8); z-index: 2; }
-  .t-org { grid-column: span 5; --tilt: -1.5deg; }
-  .t-grp { grid-column: span 3; aspect-ratio: 3 / 4; --tilt: 1.5deg; }
-  .t-evt { grid-column: span 4; --tilt: -1deg; }
+  .misa-collage { grid-auto-flow: row dense; }
+  .t-org { grid-column: span 8; grid-row: span 2; --tilt: -1.5deg; }
+  .t-grp { grid-column: span 4; aspect-ratio: 3 / 2; --tilt: 1.5deg; }
+  .t-evt { grid-column: span 4; aspect-ratio: 3 / 2; --tilt: -1deg; }
   .t-hea, .t-sta, .t-cas { grid-column: span 4; aspect-ratio: 3 / 2; }
   .t-hea { --tilt: 1.2deg; }
   .t-sta { --tilt: -1.5deg; }
   .t-cas { --tilt: 1deg; }
   .t-org img { object-position: 58% 50%; }
-  .t-grp img { object-position: 50% 72%; }
-  .t-evt img { object-position: 50% 78%; }
   .misa figcaption { color: #D6D6F3; font-size: 16px; margin-top: 18px; }
   @media (max-width: 640px) {
     .misa { padding: 22px; border-radius: 20px; }
@@ -216,10 +215,8 @@
     .misa-points { font-size: 16px; padding-left: 20px; }
     .misa-collage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 4px; }
     .misa-tile { border-radius: 14px; }
-    .t-org, .t-hea { grid-column: span 2; aspect-ratio: 3 / 2; }
-    .t-grp, .t-evt { grid-column: span 1; aspect-ratio: 3 / 4; }
-    .t-sta, .t-cas { grid-column: span 1; aspect-ratio: 4 / 3; }
-    .t-grp img { object-position: 50% 68%; }
+    .t-org, .t-evt { grid-column: span 2; grid-row: auto; aspect-ratio: 3 / 2; }
+    .t-grp, .t-hea, .t-sta, .t-cas { grid-column: span 1; aspect-ratio: 3 / 2; }
   }
   @media (prefers-reduced-motion: reduce) {
     .misa-tile { transform: none; transition: none; }
@@ -259,7 +256,7 @@
       <a class="btn" href="https://linkedin.com/in/victoryuu">LinkedIn</a>
     </div>
     </div>
-    <img class="headshot" src="images/headshot.jpg" alt="Victor Yu in a dark suit and glasses" width="200" height="200">
+    <img class="headshot" src="images/headshot.jpg" alt="Victor Yu in a dark suit and glasses" width="600" height="600">
   </header>
 
   <div class="facts reveal">
@@ -429,8 +426,8 @@
       <figure>
         <div class="misa-collage">
           <div class="misa-tile t-org"><img src="images/pmbc-organizers.jpg" alt="Victor Yu, second from left in a white shirt and striped tie, with three other organizers under silver PMBC balloons" width="1400" height="933" loading="lazy"></div>
-          <div class="misa-tile t-grp"><img src="images/pmbc-group.jpg" alt="PMBC 2026 participants and organizers holding certificates, with Victor Yu kneeling in the front row in a white shirt and striped tie" width="787" height="1400" loading="lazy"></div>
-          <div class="misa-tile t-evt"><img src="images/misa-event-group.jpg" alt="A large group of MISA members posing together after a club event" width="1050" height="1400" loading="lazy"></div>
+          <div class="misa-tile t-grp"><img src="images/pmbc-group.jpg" alt="PMBC 2026 participants and organizers holding certificates, with Victor Yu kneeling in the front row in a white shirt and striped tie" width="1400" height="933" loading="lazy"></div>
+          <div class="misa-tile t-evt"><img src="images/misa-event-group.jpg" alt="A large group of MISA members posing together after a club event" width="1400" height="933" loading="lazy"></div>
           <div class="misa-tile t-hea"><img src="images/misa-hearts.jpg" alt="MISA members making heart shapes with their hands in a group photo" width="1400" height="933" loading="lazy"></div>
           <div class="misa-tile t-sta"><img src="images/misa-segal-stairs.jpg" alt="MISA members gathered on the staircase at SFU's Segal Graduate School of Business" width="1400" height="933" loading="lazy"></div>
           <div class="misa-tile t-cas"><img src="images/misa-team-casual.jpg" alt="Six MISA members relaxing on chairs with pizza at a team social" width="1400" height="933" loading="lazy"></div>
@@ -448,7 +445,7 @@
         We stayed after to talk one-on-one with students until it was time for the rest of the class.
       </p>
       <figure>
-        <img src="images/bus300-panel-wide.jpg" alt="Victor Yu, second from left in glasses and a black shirt, on stage with three other senior students during the BUS 300 peer panel, with the slide Let's seek advice from your senior peers behind them" width="1284" height="1400" loading="lazy">
+        <img src="images/bus300-panel.jpg" alt="Victor Yu, second from left in glasses and a black shirt, standing with three other senior students at the front of the lecture hall during the BUS 300 peer panel" width="900" height="600" loading="lazy">
         <figcaption>BUS 300 peer panel. I'm second from left.</figcaption>
       </figure>
     </div>
