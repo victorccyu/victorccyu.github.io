@@ -1,60 +1,434 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victor Yu</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 0 20px;
-      color: #222;
-      line-height: 1.6;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor Yu | Business Analyst</title>
+<meta name="description" content="Victor Yu, business analyst in process improvement and automation. BBA in Operations and MIS, SFU Beedie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #111827;
+    --muted: #4b5563;
+    --soft: #6b7280;
+    --line: #e5e7eb;
+    --panel: #f9fafb;
+    --accent: #1e3a5f;
+    --accent-2: #2563eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b0f17;
+      --ink: #f3f4f6;
+      --muted: #c3c8d0;
+      --soft: #9ca3af;
+      --line: #1f2937;
+      --panel: #111827;
+      --accent: #93b4e0;
+      --accent-2: #60a5fa;
     }
-    h1 { margin-bottom: 0; }
-    h2 { border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-top: 32px; }
-    .subtitle { color: #666; margin-top: 4px; }
-    ul { padding-left: 20px; }
-    a { color: #0066cc; }
-  </style>
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0f17;
+    --ink: #f3f4f6;
+    --muted: #c3c8d0;
+    --soft: #9ca3af;
+    --line: #1f2937;
+    --panel: #111827;
+    --accent: #93b4e0;
+    --accent-2: #60a5fa;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    position: relative;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* Background bubbles: faint, slow, decorative */
+  .bubbles { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .bubbles span {
+    position: absolute; bottom: -120px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--accent-2), transparent 70%);
+    opacity: .08;
+    animation: drift linear infinite;
+  }
+  .bubbles span:nth-child(1) { left: 6%;  width: 90px;  height: 90px;  animation-duration: 38s; }
+  .bubbles span:nth-child(2) { left: 22%; width: 40px;  height: 40px;  animation-duration: 29s; animation-delay: -8s; }
+  .bubbles span:nth-child(3) { left: 48%; width: 130px; height: 130px; animation-duration: 46s; animation-delay: -14s; }
+  .bubbles span:nth-child(4) { left: 71%; width: 56px;  height: 56px;  animation-duration: 33s; animation-delay: -4s; }
+  .bubbles span:nth-child(5) { left: 88%; width: 100px; height: 100px; animation-duration: 41s; animation-delay: -22s; }
+  @keyframes drift {
+    from { transform: translateY(0) translateX(0); }
+    50%  { transform: translateY(-55vh) translateX(18px); }
+    to   { transform: translateY(-115vh) translateX(-10px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bubbles { display: none; }
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 5;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+  .logo { font-weight: 700; font-size: 17px; color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
+  nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap; display: inline-block; padding: 12px 0; }
+  nav a:hover { color: var(--ink); }
+  @media (max-width: 560px) {
+    nav ul { gap: 12px; }
+    nav a { font-size: 13px; }
+    footer a { display: inline-block; padding: 9px 0; }
+  }
+  @media (max-width: 420px) { .logo { display: none; } nav .wrap { justify-content: center; } }
+
+  .hero { padding: 96px 0 56px; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: center; }
+  .hero::before { content: ""; position: absolute; left: 50%; width: 100vw; transform: translateX(-50%); top: -40px; height: 460px; z-index: -1;
+    background: radial-gradient(60% 70% at 15% 20%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 70%),
+                radial-gradient(50% 60% at 85% 10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%); }
+  .headshot { width: 200px; height: 200px; border-radius: 16px; object-fit: cover; background: var(--panel); border: 1px solid var(--line); }
+  @media (max-width: 640px) { .hero { grid-template-columns: minmax(0, 1fr); } .headshot { width: 140px; height: 140px; order: -1; } }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-2); margin: 0 0 14px; }
+  h1 { font-size: clamp(38px, 6.5vw, 56px); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 20px; font-weight: 700; }
+  .lede { font-size: 19px; color: var(--muted); max-width: 620px; margin: 0 0 32px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-block; padding: 11px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; border: 1px solid var(--line); color: var(--ink); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #ffffff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #0b0f17; } }
+  :root[data-theme="dark"] .btn.primary { color: #0b0f17; }
+
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .fact { padding: 26px 20px 26px 0; }
+  .fact + .fact { padding-left: 20px; border-left: 1px solid var(--line); }
+  .fact b { display: block; font-size: 28px; font-weight: 700; color: var(--accent); letter-spacing: -.02em; }
+  .fact span { font-size: 14px; color: var(--muted); }
+  @media (max-width: 640px) {
+    .facts { grid-template-columns: 1fr; }
+    .fact, .fact + .fact { padding: 20px 0; border-left: none; border-top: 1px solid var(--line); }
+    .fact:first-child { border-top: none; }
+  }
+
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 22px; font-weight: 700; letter-spacing: -.01em; margin: 0 0 28px; }
+  h3 { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+  .meta { font-size: 14px; color: var(--soft); margin: 0 0 14px; }
+  p { margin: 0 0 14px; color: var(--muted); }
+  ul.points { margin: 0; padding-left: 20px; color: var(--muted); }
+  ul.points li { margin-bottom: 8px; }
+  .job { margin-bottom: 40px; }
+  .job:last-child { margin-bottom: 0; }
+
+  .case { border: 1px solid var(--line); border-radius: 12px; padding: 26px; margin-bottom: 16px; background: var(--bg); }
+  .case:last-child { margin-bottom: 0; }
+  .case .org { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--accent-2); margin: 0 0 6px; }
+  .case h3 { font-size: 18px; margin-bottom: 14px; }
+  .case dl { margin: 0; display: grid; grid-template-columns: 96px 1fr; gap: 10px 16px; font-size: 15px; }
+  .case dt { font-weight: 600; color: var(--ink); }
+  .case dd { margin: 0; color: var(--muted); }
+  .stack { margin-top: 16px; font-size: 13px; color: var(--soft); }
+  @media (max-width: 560px) { .case dl { grid-template-columns: 1fr; gap: 2px; } .case dt { margin-top: 10px; } }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 1px solid var(--line); border-radius: 6px; padding: 5px 12px; font-size: 14px; color: var(--muted); }
+
+  .js .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  footer { padding: 48px 0 64px; border-top: 1px solid var(--line); }
+  footer p { color: var(--muted); margin-bottom: 14px; }
+  footer a { color: var(--ink); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer a:hover { border-bottom-color: var(--ink); }
+  a { color: var(--accent-2); }
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+  .btn { transition: transform .2s ease, background .2s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.primary:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
+  .case { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .case:hover { transform: translateY(-3px); box-shadow: 0 10px 28px -14px rgba(17,24,39,.25); border-color: var(--accent-2); }
+  .case .outcome { display: inline-block; font-weight: 700; color: var(--accent); background: color-mix(in srgb, var(--accent) 9%, transparent); border-radius: 6px; padding: 3px 10px; margin: 0 0 12px; font-size: 14px; }
+  figure { margin: 18px 0 0; }
+  figure img { width: 100%; max-width: 560px; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); }
+  figcaption { font-size: 13px; color: var(--soft); margin-top: 8px; }
+  .band { position: relative; background: none; border: none; }
+  .band::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
+    background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); z-index: -1; }
+  .band section { border-top: none; }
+  .band + section { border-top: none; }
+  .case figure img { max-width: 100%; }
+  section p, ul.points, .lede, footer p { max-width: 68ch; }
+  nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+</style>
 </head>
 <body>
 
-  <h1>Victor Yu</h1>
-  <p class="subtitle">Business Analyst | Operations and MIS, SFU Beedie School of Business</p>
+<div class="bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
 
-  <h2>About</h2>
-  <p>
-    I'm a fifth-year BBA student at Simon Fraser University, specializing in Operations and MIS.
-    I'm currently a Business Analyst co-op at Vancouver Coastal Health, working in Data and Analytics
-    on process improvement and automation. I'm looking for a full-time role in business analysis
-    and process improvement after I graduate in June 2027.
-  </p>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">Victor Yu</a>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#cases">Case studies</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <h2>Skills</h2>
-  <ul>
-    <li>Process improvement and automation (RPA)</li>
-    <li>Data analysis and reporting</li>
-    <li>Business analysis and requirements gathering</li>
-    <li>Procurement and supply chain</li>
-    <li>Microsoft Office and Copilot</li>
-  </ul>
+<main class="wrap" id="top">
 
-  <h2>Projects</h2>
-  <ul>
-    <li><strong>RPA and process automation</strong>: Automation work at Vancouver Coastal Health Data and Analytics.</li>
-    <li><strong>Copilot for OR scheduling</strong>: Exploring Microsoft Copilot to support operating room scheduling.</li>
-    <li><strong>BAK'D Cookies supply chain case</strong>: Supply chain analysis from a course project.</li>
-  </ul>
+  <header class="hero reveal">
+    <div>
+    <p class="eyebrow">Business Analyst · Process Improvement</p>
+    <h1>Victor Yu</h1>
+    <p class="lede">
+      I map how work gets done, find where it breaks, and build the automation or process that fixes it.
+      BBA in Operations and MIS at SFU Beedie, graduating June 2027.
+    </p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:vya9@sfu.ca">Email me</a>
+      <a class="btn" href="https://linkedin.com/in/victoryuu">LinkedIn</a>
+    </div>
+    </div>
+    <img class="headshot" src="images/headshot.jpg" alt="Victor Yu in a dark suit and glasses" width="200" height="200">
+  </header>
 
-  <h2>Contact</h2>
-  <ul>
-    <li>Email: <a href="mailto:vya9@sfu.ca">vya9@sfu.ca</a></li>
-    <li>LinkedIn: <a href="https://linkedin.com/in/victoryuu">linkedin.com/in/victoryuu</a></li>
-    <li>GitHub: <a href="https://github.com/victorccyu">victorccyu</a></li>
-  </ul>
+  <div class="facts reveal">
+    <div class="fact"><b>5,000+</b><span>staff tracked by a compliance automation I rolled out at VCH</span></div>
+    <div class="fact"><b>~$40K</b><span>shipping savings identified and approved at SignalChem</span></div>
+    <div class="fact"><b>3rd of 21</b><span>teams, SFU Business Analytics Hackathon</span></div>
+  </div>
 
+  <section id="about" class="reveal">
+    <h2>About</h2>
+    <p>
+      I like finding the slow, manual parts of how work gets done. Over two co-op terms I've worked on both
+      sides of that: placing orders and counting shelves in a biotech lab, then mapping processes and rolling
+      out automations at a health authority.
+    </p>
+    <p>
+      During the BC nurses' strike I spent a week as a porter at Vancouver General Hospital. Pushing patients
+      through halls I had only seen on a screen changed how I think about the systems I build. The people using
+      them are the point.
+    </p>
+  </section>
+
+  <section id="experience" class="reveal">
+    <h2>Experience</h2>
+
+    <div class="job">
+      <h3>Business Analyst Co-op, Vancouver Coastal Health</h3>
+      <p class="meta">May 2026 to September 2026 · Data &amp; Analytics, Process Improvement</p>
+      <ul class="points">
+        <li>Rolled out a LearningHub compliance automation with monthly reporting, tracking 5,000+ staff and 1,000+ courses across six departments.</li>
+        <li>Reviewed 1,200+ invoices and built a test tracker to diagnose errors, cutting manual processing time by an estimated 80%.</li>
+        <li>Wrote submission and approval guides for a new mileage and parking reimbursement process, helping cut processing time by 60%.</li>
+        <li>Built an org-wide Copilot resource with a version-controlled library of 40+ role-based prompts.</li>
+        <li>Led discovery and process mapping for new automation projects, halving the time to document as-is processes.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <h3>Procurement Co-op, SignalChem Biotech</h3>
+      <p class="meta">September 2025 to April 2026 · Richmond, BC</p>
+      <ul class="points">
+        <li>Ran procurement for 6 lab teams, processing 400+ purchase requests with researchers, logistics and vendors.</li>
+        <li>Analyzed 557 international shipments and found nearly $40K in savings by switching carriers to DHL. The change was approved.</li>
+        <li>Negotiated discounts on 80% of purchases and standardized purchase order documentation.</li>
+        <li>Rebuilt the inventory room with an 8-step shelf count and reorder points that keep 3 months of critical supplies on hand.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="band"><section id="cases" class="reveal">
+    <h2>Case studies</h2>
+
+    <article class="case">
+      <p class="org">Vancouver Coastal Health · Automation</p>
+      <p class="outcome">5,000+ staff · 6 departments</p>
+      <h3>LearningHub compliance automation</h3>
+      <dl>
+        <dt>Problem</dt><dd>Six departments had to track mandatory training for 5,000+ staff across 1,000+ courses.</dd>
+        <dt>Approach</dt><dd>I owned the rollout from discovery through hypercare. I mapped as-is and to-be processes as Visio swim lanes, set up monthly compliance reporting for department leads, and wrote the user manual and handover agreement so the business can run it without developer support.</dd>
+        <dt>Result</dt><dd>Compliance is tracked automatically across six departments, and the solution was formally handed over to the business.</dd>
+      </dl>
+      <p class="stack">RPA · Excel · Visio · SharePoint</p>
+    </article>
+
+    <article class="case">
+      <p class="org">Vancouver Coastal Health · Testing</p>
+      <p class="outcome">~80% less manual processing</p>
+      <h3>Invoice processing automation testing</h3>
+      <dl>
+        <dt>Problem</dt><dd>An automated invoice model had to be tested before it could be trusted at scale.</dd>
+        <dt>Approach</dt><dd>I reviewed 1,200+ invoices against the model's output and built a test tracker to log errors, spot patterns and find root causes. Results for the facilities category went into retraining the model. I also ran check-ins with teammates and showed them how to document edge cases consistently.</dd>
+        <dt>Result</dt><dd>An estimated 80% cut in manual processing time, and better training data for the next version.</dd>
+      </dl>
+      <p class="stack">Excel · PivotTables</p>
+    </article>
+
+    <article class="case">
+      <p class="org">Vancouver Coastal Health · AI enablement</p>
+      <p class="outcome">40+ role-based prompts</p>
+      <h3>Copilot enablement and prompt library</h3>
+      <dl>
+        <dt>Problem</dt><dd>Staff had Microsoft Copilot but no shared way to use it for their actual work.</dd>
+        <dt>Approach</dt><dd>I built an org-wide resource with prompting tips, workflow shortcuts and a library of 40+ role-based prompts. Each prompt follows one template (role, objective, context, source material, rules, output format, task) and is grouped for BAs, developers and general staff. I shipped it as a Word guide and an interactive HTML version, and presented AI use cases to the team at the end of my term.</dd>
+      </dl>
+      <p class="stack">Microsoft Copilot · HTML · Word</p>
+    </article>
+
+    <article class="case">
+      <p class="org">Vancouver Coastal Health · Process design</p>
+      <p class="outcome">60% faster processing</p>
+      <h3>Mileage and parking reimbursement</h3>
+      <dl>
+        <dt>Problem</dt><dd>A new reimbursement process was being piloted, and people needed clear guidance to use it.</dd>
+        <dt>Approach</dt><dd>I wrote step-by-step guides for staff submitting claims and for the approvers reviewing them.</dd>
+        <dt>Result</dt><dd>Helped cut processing time by 60%.</dd>
+      </dl>
+    </article>
+
+    <article class="case">
+      <p class="org">Vancouver Coastal Health · Discovery</p>
+      <h3>Discovery for new automations</h3>
+      <dl>
+        <dt>Approach</dt><dd>I led discovery for new automation candidates, including patient account creation and iCIMS resume extraction. I created an AI-assisted documentation method that cut the time to map as-is processes by 50%, built a Power Query pipeline to combine RPA log files for monitoring, and wrote Excel VBA tools to process iCIMS error files. I also tested Copilot for OR scheduling using structured extraction prompts.</dd>
+      </dl>
+      <p class="stack">Visio · Power Query · Excel VBA · Copilot · iCIMS</p>
+    </article>
+
+    <article class="case">
+      <p class="org">SignalChem Biotech · Analysis</p>
+      <p class="outcome">~$40K potential savings</p>
+      <h3>Carrier cost analysis</h3>
+      <dl>
+        <dt>Problem</dt><dd>International shipping went through UPS and FedEx with no clear cost comparison.</dd>
+        <dt>Approach</dt><dd>I analyzed 557 international shipments in Excel, compared carrier rates and modeled the cost of switching to DHL.</dd>
+        <dt>Result</dt><dd>Nearly $40,000 in potential savings. The switch was approved, and savings began within a couple of months.</dd>
+      </dl>
+      <p class="stack">Excel</p>
+    </article>
+
+    <article class="case">
+      <p class="org">SignalChem Biotech · Operations</p>
+      <h3>Inventory process redesign</h3>
+      <dl>
+        <dt>Approach</dt><dd>I turned a storage room with no real process into a repeatable system: an 8-step shelf count, usage analysis to set monthly consumption rates, and reorder points that keep three months of critical supplies on hand.</dd>
+      </dl>
+    </article>
+
+    <article class="case">
+      <p class="org">SFU Business Analytics Hackathon · 3rd place</p>
+      <p class="outcome">~$102M estimated savings</p>
+      <h3>BC Hydro supply chain resilience</h3>
+      <dl>
+        <dt>Problem</dt><dd>How exposed is BC Hydro's supply chain to tariffs and supplier risk?</dd>
+        <dt>Approach</dt><dd>We simulated a 25% tariff across supply categories and analyzed supplier locations, lead times and geopolitical risk in Excel and Tableau. We found a 207% rise in U.S. imports from 2021 to 2024 and recommended sourcing switchgear from Germany and diversifying with 200+ Canadian suppliers.</dd>
+        <dt>Result</dt><dd>An estimated $102M in savings and 3rd place overall out of 21 teams.</dd>
+      </dl>
+      <figure>
+        <img src="images/hackathon-bchydro.jpg" alt="Victor Yu's team presenting their BC Hydro supply chain analysis on stage at the SFU Business Analytics Hackathon" width="1400" height="349" loading="lazy">
+        <figcaption>Presenting our BC Hydro analysis at the hackathon.</figcaption>
+      </figure>
+      <p class="stack">Excel · Tableau</p>
+    </article>
+  </section></div>
+
+  <section id="leadership" class="reveal">
+    <h2>Leadership</h2>
+    <div class="job">
+      <h3>Vice President, SFU Management Information Systems Association</h3>
+      <p class="meta">April 2026 to present</p>
+      <ul class="points">
+        <li>Oversee 10 directors and their teams in a club of 60+ members running four flagship events.</li>
+        <li>Pitched the club's plan to SFU Beedie and secured up to $5,000 in event funding, a 25% increase.</li>
+        <li>Connected 250+ students with 80 industry professionals through networking nights, panels, workshops and hackathons, including PMBC 2026.</li>
+        <li>Built onboarding for new directors, including role documents for Corporate Relations and Strategy.</li>
+      </ul>
+    </div>
+    <div class="job speaking">
+      <h3>Peer panel speaker, BUS 300</h3>
+      <p class="meta">Fall 2026 · SFU Beedie School of Business</p>
+      <p>
+        Professor Jason Ho invited four senior business students, including me, to speak to his BUS 300 class of about
+        300 students about co-op, case competitions, clubs and the move into upper-division courses. Our main advice
+        was not to chase an opportunity just because everyone else is. Take time to work out what you actually want.
+        We stayed after to talk one-on-one with students until it was time for the rest of the class.
+      </p>
+      <figure>
+        <img src="images/bus300-panel-wide.jpg" alt="Victor Yu, second from left in glasses and a black shirt, on stage with three other senior students during the BUS 300 peer panel, with the slide Let's seek advice from your senior peers behind them" width="1284" height="1400" loading="lazy">
+        <figcaption>BUS 300 peer panel. I'm second from left.</figcaption>
+      </figure>
+    </div>
+
+    <div class="job">
+      <h3>Community</h3>
+      <ul class="points">
+        <li>SFU Community Leader, running campus events alongside co-op.</li>
+        <li>Former volunteer Program Coordinator with Start2Finish's Running &amp; Reading Club.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <h2>Skills and certifications</h2>
+    <div class="chips" style="margin-bottom:24px">
+      <span class="chip">Excel (Power Query, PivotTables, VBA)</span>
+      <span class="chip">Power Automate</span>
+      <span class="chip">RPA</span>
+      <span class="chip">Tableau</span>
+      <span class="chip">Visio</span>
+      <span class="chip">SharePoint &amp; Teams</span>
+      <span class="chip">Microsoft Copilot</span>
+      <span class="chip">PeopleSoft</span>
+      <span class="chip">iCIMS</span>
+      <span class="chip">Databricks</span>
+    </div>
+    <ul class="points">
+      <li>Databricks Fundamentals Accreditation, October 2026</li>
+      <li>Databricks Data Governance Fundamentals, in progress</li>
+    </ul>
+  </section>
+
+  <footer id="contact" class="reveal">
+    <p>Open to business analyst and process improvement roles starting summer 2027.</p>
+    <p>
+      <a href="mailto:vya9@sfu.ca">vya9@sfu.ca</a> &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/victoryuu">LinkedIn</a> &nbsp;·&nbsp;
+      <a href="https://github.com/victorccyu">GitHub</a>
+    </p>
+  </footer>
+
+</main>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
 </body>
 </html>
