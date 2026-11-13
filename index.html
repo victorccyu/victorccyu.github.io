@@ -115,7 +115,8 @@
   p { margin: 0 0 14px; color: var(--muted); }
   ul.points { margin: 0; padding-left: 20px; color: var(--muted); }
   ul.points li { margin-bottom: 8px; }
-  .job { margin-bottom: 16px; border: 1px solid var(--line); border-radius: 12px; padding: 22px 26px; background: var(--bg); }
+  .job { margin-bottom: 16px; border: 1px solid var(--line); border-radius: 12px; padding: 22px 26px; background: var(--bg); transition: border-color .25s ease, box-shadow .25s ease; }
+  .job:hover { border-color: #bfdbfe; box-shadow: 0 10px 28px -18px rgba(37,99,235,.35); }
   .job:last-child { margin-bottom: 0; }
 
   .case { border: 1px solid #f3eedf; border-radius: 12px; padding: 26px; margin-bottom: 16px; background: #fdfbf6; }
@@ -144,7 +145,7 @@
   .btn:hover { transform: translateY(-1px); }
   .btn.primary:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
   .case { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-  .case:hover { transform: translateY(-3px); box-shadow: 0 10px 28px -14px rgba(17,24,39,.25); border-color: var(--accent-2); }
+  .case:hover { transform: translateY(-3px); box-shadow: 0 10px 28px -14px rgba(17,24,39,.25); border-color: #bfdbfe; }
   .case .outcome { display: inline-block; font-weight: 700; color: var(--accent); background: color-mix(in srgb, var(--accent) 9%, transparent); border-radius: 6px; padding: 3px 10px; margin: 0 0 12px; font-size: 14px; }
   figure { margin: 18px 0 0; }
   figure img { width: 100%; max-width: 560px; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); }
