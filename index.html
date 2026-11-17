@@ -210,6 +210,31 @@
   }
   nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
+  /* MISA orbit: VP in the centre, 10 directors, 60 members */
+  .misa-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; margin-bottom: 32px; }
+  .misa-head .misa-meta { margin-bottom: 0; }
+  .orbit { width: calc(210px * var(--oz, 1)); height: auto; display: block; overflow: visible; }
+  .o-track { fill: none; stroke: rgba(167,214,255,.22); stroke-width: 1; }
+  .o-core { fill: #FCFCFF; }
+  .o-label { font: 900 20px Poppins, system-ui, sans-serif; fill: #252C9E; }
+  .o-dir { fill: #A7D6FF; }
+  .o-mem { fill: #9295F5; }
+  .o-inner { animation: spin calc(70s / var(--os, 1)) linear infinite; }
+  .o-outer { animation: spin calc(200s / var(--os, 1)) linear infinite reverse; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 640px) { .misa-head { grid-template-columns: minmax(0, 1fr); gap: 20px; margin-bottom: 24px; } .orbit { width: calc(170px * var(--oz, 1)); margin: 0 auto; } }
+  @media (prefers-reduced-motion: reduce) { .o-inner, .o-outer { animation: none; } }
+
+  /* Involvement cards */
+  .speaking { margin-bottom: 16px; }
+  .involve { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .involve .job { margin-bottom: 0; }
+  .involve .job > p:last-child { margin-bottom: 0; }
+  .involve .also { grid-column: 1 / -1; }
+  .also h3 { margin-bottom: 14px; }
+  ul.chips { list-style: none; margin: 0; padding: 0; }
+  @media (max-width: 640px) { .involve { grid-template-columns: minmax(0, 1fr); } }
+
   /* Journey timeline: the line draws in as you scroll */
   .tl { list-style: none; margin: 0; padding: 0; position: relative; }
   .tl::before, .tl-fill { content: ""; position: absolute; left: 95px; top: 10px; bottom: 34px; width: 2px; background: var(--line); }
@@ -450,22 +475,32 @@
   </section></div>
 
   <section id="leadership" class="reveal">
-    <h2>Leadership</h2>
+    <h2>At Beedie</h2>
     <div class="misa">
       <span class="misa-deco d1" aria-hidden="true"></span>
       <span class="misa-deco d2" aria-hidden="true"></span>
       <span class="misa-deco d3" aria-hidden="true"></span>
       <span class="misa-deco d4" aria-hidden="true"></span>
-      <img class="misa-logo" src="images/misa-logo.png" alt="MISA logo" width="600" height="169" loading="lazy">
-      <h3>Vice President</h3>
-      <p class="misa-meta">SFU Management Information Systems Association · April 2026 to present</p>
+      <div class="misa-head">
+        <div>
+          <img class="misa-logo" src="images/misa-logo.png" alt="MISA logo" width="600" height="169" loading="lazy">
+          <h3>Vice President</h3>
+          <p class="misa-meta">SFU Management Information Systems Association · April 2026 to present</p>
+        </div>
+        <svg class="orbit" viewBox="-112 -112 224 224" aria-hidden="true" focusable="false">
+        <circle class="o-track" r="58"/><circle class="o-track" r="100"/>
+        <g class="o-outer"><circle class="o-mem" cx="0.0" cy="-100.0" r="2.2"/><circle class="o-mem" cx="10.5" cy="-99.5" r="2.2"/><circle class="o-mem" cx="20.8" cy="-97.8" r="2.2"/><circle class="o-mem" cx="30.9" cy="-95.1" r="2.2"/><circle class="o-mem" cx="40.7" cy="-91.4" r="2.2"/><circle class="o-mem" cx="50.0" cy="-86.6" r="2.2"/><circle class="o-mem" cx="58.8" cy="-80.9" r="2.2"/><circle class="o-mem" cx="66.9" cy="-74.3" r="2.2"/><circle class="o-mem" cx="74.3" cy="-66.9" r="2.2"/><circle class="o-mem" cx="80.9" cy="-58.8" r="2.2"/><circle class="o-mem" cx="86.6" cy="-50.0" r="2.2"/><circle class="o-mem" cx="91.4" cy="-40.7" r="2.2"/><circle class="o-mem" cx="95.1" cy="-30.9" r="2.2"/><circle class="o-mem" cx="97.8" cy="-20.8" r="2.2"/><circle class="o-mem" cx="99.5" cy="-10.5" r="2.2"/><circle class="o-mem" cx="100.0" cy="-0.0" r="2.2"/><circle class="o-mem" cx="99.5" cy="10.5" r="2.2"/><circle class="o-mem" cx="97.8" cy="20.8" r="2.2"/><circle class="o-mem" cx="95.1" cy="30.9" r="2.2"/><circle class="o-mem" cx="91.4" cy="40.7" r="2.2"/><circle class="o-mem" cx="86.6" cy="50.0" r="2.2"/><circle class="o-mem" cx="80.9" cy="58.8" r="2.2"/><circle class="o-mem" cx="74.3" cy="66.9" r="2.2"/><circle class="o-mem" cx="66.9" cy="74.3" r="2.2"/><circle class="o-mem" cx="58.8" cy="80.9" r="2.2"/><circle class="o-mem" cx="50.0" cy="86.6" r="2.2"/><circle class="o-mem" cx="40.7" cy="91.4" r="2.2"/><circle class="o-mem" cx="30.9" cy="95.1" r="2.2"/><circle class="o-mem" cx="20.8" cy="97.8" r="2.2"/><circle class="o-mem" cx="10.5" cy="99.5" r="2.2"/><circle class="o-mem" cx="0.0" cy="100.0" r="2.2"/><circle class="o-mem" cx="-10.5" cy="99.5" r="2.2"/><circle class="o-mem" cx="-20.8" cy="97.8" r="2.2"/><circle class="o-mem" cx="-30.9" cy="95.1" r="2.2"/><circle class="o-mem" cx="-40.7" cy="91.4" r="2.2"/><circle class="o-mem" cx="-50.0" cy="86.6" r="2.2"/><circle class="o-mem" cx="-58.8" cy="80.9" r="2.2"/><circle class="o-mem" cx="-66.9" cy="74.3" r="2.2"/><circle class="o-mem" cx="-74.3" cy="66.9" r="2.2"/><circle class="o-mem" cx="-80.9" cy="58.8" r="2.2"/><circle class="o-mem" cx="-86.6" cy="50.0" r="2.2"/><circle class="o-mem" cx="-91.4" cy="40.7" r="2.2"/><circle class="o-mem" cx="-95.1" cy="30.9" r="2.2"/><circle class="o-mem" cx="-97.8" cy="20.8" r="2.2"/><circle class="o-mem" cx="-99.5" cy="10.5" r="2.2"/><circle class="o-mem" cx="-100.0" cy="0.0" r="2.2"/><circle class="o-mem" cx="-99.5" cy="-10.5" r="2.2"/><circle class="o-mem" cx="-97.8" cy="-20.8" r="2.2"/><circle class="o-mem" cx="-95.1" cy="-30.9" r="2.2"/><circle class="o-mem" cx="-91.4" cy="-40.7" r="2.2"/><circle class="o-mem" cx="-86.6" cy="-50.0" r="2.2"/><circle class="o-mem" cx="-80.9" cy="-58.8" r="2.2"/><circle class="o-mem" cx="-74.3" cy="-66.9" r="2.2"/><circle class="o-mem" cx="-66.9" cy="-74.3" r="2.2"/><circle class="o-mem" cx="-58.8" cy="-80.9" r="2.2"/><circle class="o-mem" cx="-50.0" cy="-86.6" r="2.2"/><circle class="o-mem" cx="-40.7" cy="-91.4" r="2.2"/><circle class="o-mem" cx="-30.9" cy="-95.1" r="2.2"/><circle class="o-mem" cx="-20.8" cy="-97.8" r="2.2"/><circle class="o-mem" cx="-10.5" cy="-99.5" r="2.2"/></g>
+        <g class="o-inner"><circle class="o-dir" cx="0.0" cy="-58.0" r="7"/><circle class="o-dir" cx="34.1" cy="-46.9" r="7"/><circle class="o-dir" cx="55.2" cy="-17.9" r="7"/><circle class="o-dir" cx="55.2" cy="17.9" r="7"/><circle class="o-dir" cx="34.1" cy="46.9" r="7"/><circle class="o-dir" cx="0.0" cy="58.0" r="7"/><circle class="o-dir" cx="-34.1" cy="46.9" r="7"/><circle class="o-dir" cx="-55.2" cy="17.9" r="7"/><circle class="o-dir" cx="-55.2" cy="-17.9" r="7"/><circle class="o-dir" cx="-34.1" cy="-46.9" r="7"/></g>
+        <circle class="o-core" r="27"/><text class="o-label" y="1" text-anchor="middle" dominant-baseline="middle">VP</text>
+      </svg>
+      </div>
       <ul class="misa-stats">
         <li><b>10</b><span>directors and their teams</span></li>
         <li><b>60+</b><span>club members</span></li>
         <li><b>250+</b><span>students connected with 80 industry professionals</span></li>
         <li><b>$5K</b><span>in event funding, a 25% increase</span></li>
       </ul>
-      <p class="misa-note">I pitched the club's plan to SFU Beedie to win that funding, and built onboarding for new directors, including role documents for Corporate Relations and Strategy.</p>
+      <p class="misa-note">We run four flagship events. I pitched the club's plan to SFU Beedie to win that funding, and built onboarding for new directors, including role documents for Corporate Relations and Strategy.</p>
       <figure>
         <div class="misa-collage">
           <div class="misa-tile t-org"><img src="images/pmbc-organizers.jpg" alt="Victor Yu, second from left in a white shirt and striped tie, with three other organizers under silver PMBC balloons" width="1400" height="933" loading="lazy"></div>
@@ -492,12 +527,27 @@
       </figure>
     </div>
 
-    <div class="job">
-      <h3>Community</h3>
-      <ul class="points">
-        <li>SFU Community Leader, running campus events alongside co-op.</li>
-        <li>Former volunteer Program Coordinator with Start2Finish's Running &amp; Reading Club.</li>
-      </ul>
+    <div class="involve">
+      <div class="job">
+        <h3>SFU Community Leader</h3>
+        <p class="meta">Fall 2025 to Summer 2026</p>
+        <p>Ran campus events alongside co-op.</p>
+      </div>
+      <div class="job">
+        <h3>Program Coordinator, Start2Finish</h3>
+        <p class="meta">February to June 2024 · Running &amp; Reading Club</p>
+        <p>Led discussions and activities with kids, and mentored high school volunteers in literacy support.</p>
+      </div>
+      <div class="job also">
+        <h3>Also at Beedie</h3>
+        <ul class="chips">
+          <li class="chip">Launch Leader, Fall 2025</li>
+          <li class="chip">Moderator, Beedie Summit Conference, Fall 2025 and Spring 2026</li>
+          <li class="chip">Moderator, BUS 201/202 Case Competition, Fall 2025</li>
+          <li class="chip">Timekeeper, Elite Case Comp 2026</li>
+          <li class="chip">Top 10 finalist, BUS 336 Data Analytics &amp; Visualization Hackathon</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -638,6 +688,28 @@
     window.addEventListener('scroll', ask, { passive: true });
     window.addEventListener('resize', ask);
     update();
+  })();
+</script>
+<script>
+  /* MISA orbit tweak panel. Only with ?tweak. */
+  (function () {
+    var m = document.querySelector('.misa');
+    if (!m || !/[?&]tweak\b/.test(location.search)) return;
+    var box = document.createElement('div');
+    box.setAttribute('style', 'position:fixed;left:12px;bottom:12px;z-index:50;width:220px;max-width:calc(100vw - 24px);background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 12px 32px -12px rgba(17,24,39,.35);padding:14px 16px;font:13px/1.4 Inter,system-ui,sans-serif;color:#111827');
+    var out = document.createElement('p'), v = { speed: 1, size: 1 };
+    out.setAttribute('style', 'margin:10px 0 0;font:12px/1.5 ui-monospace,Menlo,monospace;color:#4b5563;max-width:none');
+    function show() { out.textContent = 'orbit speed ' + v.speed + ', size ' + v.size; }
+    var t = document.createElement('strong'); t.textContent = 'MISA orbit'; box.appendChild(t);
+    [['speed', 'Speed', 0, 6, 0.1, '--os'], ['size', 'Size', 0.6, 1.4, 0.05, '--oz']].forEach(function (d) {
+      var lab = document.createElement('label'); lab.setAttribute('style', 'display:block;margin-top:10px');
+      var n = document.createElement('span'); n.textContent = d[1]; n.style.display = 'block';
+      var inp = document.createElement('input'); inp.type = 'range'; inp.min = d[2]; inp.max = d[3]; inp.step = d[4]; inp.value = 1;
+      inp.setAttribute('style', 'width:100%;margin:2px 0 0');
+      inp.addEventListener('input', function () { v[d[0]] = parseFloat(inp.value); m.style.setProperty(d[5], Math.max(v[d[0]], 0.001)); show(); });
+      lab.appendChild(n); lab.appendChild(inp); box.appendChild(lab);
+    });
+    box.appendChild(out); show(); document.body.appendChild(box);
   })();
 </script>
 </body>
