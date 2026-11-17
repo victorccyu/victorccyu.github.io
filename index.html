@@ -210,6 +210,30 @@
   }
   nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
+  /* Journey timeline: the line draws in as you scroll */
+  .tl { list-style: none; margin: 0; padding: 0; position: relative; }
+  .tl::before, .tl-fill { content: ""; position: absolute; left: 95px; top: 10px; bottom: 34px; width: 2px; background: var(--line); }
+  .tl-fill { background: var(--accent); transform-origin: top; }
+  .js .tl-fill { transform: scaleY(0); }
+  .stop { position: relative; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 48px; padding-bottom: 20px; }
+  .stop:last-child { padding-bottom: 0; }
+  .stop::before { content: ""; position: absolute; left: 89px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); z-index: 1; transition: background .3s ease; }
+  .stop.on::before, html:not(.js) .stop::before { background: var(--accent); }
+  .stop.next::before { border-style: dashed; }
+  .stop.next.on::before { background: var(--bg); }
+  .yr { margin: 0; text-align: right; font-size: 26px; line-height: 30px; font-weight: 700; letter-spacing: -.02em; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .stop .job { margin-bottom: 0; }
+  .stop .job > p:last-child { margin-bottom: 0; }
+  .stop.next .job { border-style: dashed; background: var(--panel); }
+  @media (max-width: 640px) {
+    .tl::before, .tl-fill { left: 6px; }
+    .stop { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-left: 30px; }
+    .stop::before { left: 0; }
+    .yr { text-align: left; }
+    .stop .job { padding: 18px 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .js .tl-fill { transform: none; } .stop::before { transition: none; } }
+
   /* Pull quote: the porter week */
   .pull { position: relative; margin: 28px 0 0; padding: 30px 32px 30px 76px; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px; }
   .pull::before { content: "\201C"; position: absolute; left: 24px; top: 14px; font-size: 76px; line-height: 1; font-weight: 700; color: var(--amber); font-family: Georgia, "Times New Roman", serif; }
@@ -295,29 +319,57 @@
   </section>
 
   <section id="experience" class="reveal">
-    <h2>Experience</h2>
-
-    <div class="job">
-      <h3>Business Analyst Co-op, Vancouver Coastal Health</h3>
-      <p class="meta">May 2026 to September 2026 · Data &amp; Analytics, Process Improvement</p>
-      <ul class="points">
-        <li>Rolled out a compliance automation across six departments and tested an invoice automation. Both are case studies below.</li>
-        <li>Wrote the guides for a new mileage and parking reimbursement process, helping cut processing time by 60%.</li>
-        <li>Built an org-wide Copilot library of 40+ role-based prompts.</li>
-        <li>Led process mapping for new automation projects, halving the time to document as-is processes.</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <h3>Procurement Co-op, SignalChem Biotech</h3>
-      <p class="meta">September 2025 to April 2026 · Richmond, BC</p>
-      <ul class="points">
-        <li>Ran procurement for 6 lab teams, processing 400+ purchase requests.</li>
-        <li>Found nearly $40K in potential shipping savings. Case study below.</li>
-        <li>Negotiated discounts on 80% of purchases.</li>
-        <li>Rebuilt the inventory room with an 8-step shelf count and reorder points that keep 3 months of critical supplies on hand.</li>
-      </ul>
-    </div>
+    <h2>Journey</h2>
+    <ol class="tl">
+      <li class="tl-fill" aria-hidden="true"></li>
+      <li class="stop">
+        <p class="yr">2020</p>
+        <div class="job">
+          <h3>Lead Cook, Cactus Club Cafe</h3>
+          <p class="meta">July 2020 to January 2023 · Burnaby</p>
+          <p>My first job. I started in grade 10 and stayed two and a half years.</p>
+        </div>
+      </li>
+      <li class="stop">
+        <p class="yr">2024</p>
+        <div class="job">
+          <h3>Food Service Lead Hand, City of Burnaby</h3>
+          <p class="meta">March 2024 to present · Burnaby Mountain Restaurant</p>
+          <p>Still in a kitchen, alongside school.</p>
+        </div>
+      </li>
+      <li class="stop">
+        <p class="yr">2025</p>
+        <div class="job">
+          <h3>Procurement Co-op, SignalChem Biotech</h3>
+          <p class="meta">September 2025 to April 2026 · Richmond, BC</p>
+          <ul class="points">
+            <li>Ran procurement for 6 lab teams and 400+ purchase requests, negotiating discounts on 80% of purchases.</li>
+            <li>Found nearly $40K in potential shipping savings. Case study below.</li>
+            <li>Rebuilt the inventory room with an 8-step shelf count and reorder points that keep 3 months of critical supplies on hand.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="stop">
+        <p class="yr">2026</p>
+        <div class="job">
+          <h3>Business Analyst Co-op, Vancouver Coastal Health</h3>
+          <p class="meta">May 2026 to September 2026 · Data &amp; Analytics, Process Improvement</p>
+          <ul class="points">
+            <li>Rolled out a compliance automation across six departments and tested an invoice automation. Both are case studies below.</li>
+            <li>Wrote the guides for a new mileage and parking reimbursement process, helping cut processing time by 60%.</li>
+            <li>Built an org-wide Copilot library of 40+ role-based prompts and halved the time to document as-is processes.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="stop next">
+        <p class="yr">2027</p>
+        <div class="job">
+          <h3>What's next</h3>
+          <p>Graduating in June and looking for a business analyst or process improvement role.</p>
+        </div>
+      </li>
+    </ol>
   </section>
 
   <div class="band"><section id="cases" class="reveal">
@@ -565,6 +617,27 @@
       lab.appendChild(name); lab.appendChild(inp); box.appendChild(lab);
     });
     box.appendChild(out); show(); document.body.appendChild(box);
+  })();
+</script>
+<script>
+  /* Journey timeline: fill the line and light the dots as the reader scrolls. */
+  (function () {
+    var tl = document.querySelector('.tl'), fill = document.querySelector('.tl-fill');
+    if (!tl || !fill) return;
+    var stops = tl.querySelectorAll('.stop'), still = window.matchMedia('(prefers-reduced-motion: reduce)').matches, queued = false;
+    function update() {
+      queued = false;
+      var mark = window.innerHeight * 0.72, r = tl.getBoundingClientRect();
+      var prog = still ? 1 : Math.max(0, Math.min(1, (mark - r.top) / r.height));
+      fill.style.transform = 'scaleY(' + prog.toFixed(3) + ')';
+      for (var i = 0; i < stops.length; i++) {
+        stops[i].classList.toggle('on', still || stops[i].getBoundingClientRect().top < mark);
+      }
+    }
+    function ask() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask);
+    update();
   })();
 </script>
 </body>
