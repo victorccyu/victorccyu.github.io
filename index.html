@@ -658,7 +658,7 @@
     var cv = document.querySelector('.hero-field');
     if (!cv || !cv.getContext) return;
     var ctx = cv.getContext('2d');
-    var P = { spacing: 26, speed: 1, opacity: 0.5, size: 1.6, chars: 0.12, wave: 1 };
+    var P = { spacing: 39, speed: 1, opacity: 0.58, size: 1.6, chars: 0.16, wave: 1.3 };
     var GLYPHS = '+:/<>01{}=*#';
     var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var w = 0, h = 0, t = 0, last = 0, visible = true, raf = 0;
@@ -772,12 +772,90 @@
   })();
 </script>
 <script>
+  /* Koi in the empty side margins on wide screens. Decorative. Off on narrow screens, under reduced motion, and when the tab is hidden. */
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var wide = window.matchMedia('(min-width: 1220px)');
+    var cv = document.createElement('canvas');
+    cv.setAttribute('aria-hidden', 'true');
+    cv.setAttribute('style', 'position:fixed;inset:0;z-index:0;pointer-events:none;display:none');
+    document.body.appendChild(cv);
+    var ctx = cv.getContext('2d');
+    var R = '#dc2626', G = '#9ca3af', K = '#1f2937', Y = '#d97706', B = '#92400e';
+    var PATTERNS = [
+      [R, G, R, R, G, G, R, G, G], [G, R, G, K, G, R, G, G, G], [K, R, K, G, R, K, G, K, K],
+      [Y, Y, Y, Y, Y, Y, Y, Y, Y], [B, B, B, B, B, B, B, B, B]
+    ];
+    var BODY = '@O0Ooo:~<', GAP = 9, CONTENT = 880;
+    var fish = [], w = 0, h = 0, on = false, raf = 0, last = 0;
+    function laneX(f) { var m = (w - CONTENT) / 2; return f.side < 0 ? m / 2 : w - m / 2; }
+    function make(i) {
+      return {
+        side: i % 2 ? 1 : -1, dir: i < 2 ? Math.PI / 2 : -Math.PI / 2,
+        y: Math.random() * h, v: 10 + Math.random() * 8, wob: Math.random() * 6.28,
+        pat: PATTERNS[i % PATTERNS.length]
+      };
+    }
+    function resize() {
+      w = window.innerWidth; h = window.innerHeight;
+      var d = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(w * d); cv.height = Math.round(h * d);
+      ctx.setTransform(d, 0, 0, d, 0, 0);
+    }
+    function step(dt) {
+      for (var i = 0; i < fish.length; i++) {
+        var f = fish[i];
+        f.wob += dt * 1.5;
+        f.y += Math.sin(f.dir) * f.v * dt;
+        if (f.y > h + 120) f.y = -120;
+        if (f.y < -120) f.y = h + 120;
+      }
+    }
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '700 12px ui-monospace, Menlo, Consolas, monospace';
+      ctx.globalAlpha = 0.45;
+      for (var i = 0; i < fish.length; i++) {
+        var f = fish[i], cx = laneX(f);
+        for (var k = BODY.length - 1; k >= 0; k--) {
+          var x = cx + Math.sin(f.wob - k * 0.7) * 4, y = f.y - Math.sin(f.dir) * k * GAP;
+          ctx.save(); ctx.translate(x, y); ctx.rotate(f.dir);
+          ctx.fillStyle = f.pat[k]; ctx.fillText(BODY.charAt(k), 0, 0); ctx.restore();
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+    function loop(now) {
+      raf = 0;
+      if (!on) return;
+      var dt = Math.min((now - last) / 1000, 0.05); last = now;
+      step(dt); draw(); raf = requestAnimationFrame(loop);
+    }
+    function sync() {
+      if (wide.matches && !document.hidden) {
+        if (!on) {
+          on = true; cv.style.display = 'block'; resize();
+          if (!fish.length) for (var i = 0; i < 4; i++) fish.push(make(i));
+          last = performance.now(); raf = requestAnimationFrame(loop);
+        }
+      } else {
+        on = false; cv.style.display = 'none';
+      }
+    }
+    wide.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+    window.addEventListener('resize', function () { if (on) { resize(); draw(); } });
+    sync();
+  })();
+</script>
+<script>
   /* Footer koi pond. Fish are chains of keyboard characters: the head leads, the body follows. */
   (function () {
     var cv = document.querySelector('.pond');
     if (!cv || !cv.getContext) return;
     var ctx = cv.getContext('2d');
-    var P = { speed: 1, count: 6, size: 1, opacity: 0.7 };
+    var P = { speed: 1, count: 11, size: 1, opacity: 0.85, vary: 0.6, shimmer: 0.5 };
     var R = '#dc2626', G = '#9ca3af', K = '#1f2937', Y = '#d97706', B = '#92400e';
     var PATTERNS = [
       [R, G, R, R, G, G, R, G, G],   /* kohaku */
@@ -788,7 +866,7 @@
     ];
     var BODY = '@O0Ooo:~<', SCALE = [1.25, 1.3, 1.25, 1.1, 0.95, 0.8, 0.7, 0.8, 1];
     var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var w = 0, h = 0, fish = [], food = [], visible = true, raf = 0, last = 0;
+    var w = 0, h = 0, fish = [], food = [], visible = true, raf = 0, last = 0, clock = 0;
     function resize() {
       var r = cv.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
       w = r.width; h = r.height; cv.width = Math.round(w * d); cv.height = Math.round(h * d);
@@ -797,7 +875,7 @@
     function make(i) {
       var dir = Math.random() < 0.5 ? 0 : Math.PI, f = {
         x: Math.random() * w, y: 28 + Math.random() * Math.max(h - 56, 1), course: dir, a: dir,
-        v: 16 + Math.random() * 12, wob: Math.random() * 6.28, wf: 0.5 + Math.random() * 0.5, pat: PATTERNS[i % PATTERNS.length], seg: []
+        v: 16 + Math.random() * 12, wob: Math.random() * 6.28, wf: 0.5 + Math.random() * 0.5, r: Math.random(), pat: PATTERNS[i % PATTERNS.length], seg: []
       };
       for (var k = 0; k < BODY.length; k++) f.seg.push({ x: f.x - Math.cos(dir) * k * 8, y: f.y });
       return f;
@@ -807,11 +885,13 @@
       while (fish.length < n) fish.push(make(fish.length));
       fish.length = n;
     }
+    function fscale(f) { return P.size * (1 + (f.r - 0.5) * 0.8 * P.vary); }
     function turn(from, to) { var d = to - from; while (d > Math.PI) d -= 6.2832; while (d < -Math.PI) d += 6.2832; return d; }
     function step(dt) {
-      var gap = 8 * P.size, i, k, f;
+      var i, k, f;
       for (i = 0; i < fish.length; i++) {
         f = fish[i]; f.wob += dt * f.wf;
+        var gap = 8 * fscale(f);
         var goal = f.course + Math.sin(f.wob) * 0.45, best = 150 * 150, hit = -1;
         for (k = 0; k < food.length; k++) {
           var dx = food[k].x - f.x, dy = food[k].y - f.y, dd = dx * dx + dy * dy;
@@ -846,8 +926,14 @@
         for (k = f.seg.length - 1; k >= 0; k--) {
           var s = f.seg[k], prev = f.seg[Math.max(k - 1, 0)], next = f.seg[Math.min(k + 1, f.seg.length - 1)];
           ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(Math.atan2(prev.y - next.y, prev.x - next.x));
-          ctx.font = '700 ' + Math.round(13 * P.size * SCALE[k]) + 'px ui-monospace, Menlo, Consolas, monospace';
-          ctx.fillStyle = f.pat[k]; ctx.fillText(BODY.charAt(k), 0, 0); ctx.restore();
+          ctx.font = '700 ' + Math.round(13 * fscale(f) * SCALE[k]) + 'px ui-monospace, Menlo, Consolas, monospace';
+          ctx.fillStyle = f.pat[k]; ctx.fillText(BODY.charAt(k), 0, 0);
+          if (P.shimmer > 0) {
+            var glint = Math.max(0, Math.sin(clock * 2.5 - k * 0.7 + f.wob));
+            ctx.globalAlpha = P.opacity * P.shimmer * glint * 0.85; ctx.fillStyle = '#ffffff';
+            ctx.fillText(BODY.charAt(k), 0, 0);
+          }
+          ctx.restore();
         }
       }
       ctx.font = '700 12px ui-monospace, Menlo, Consolas, monospace'; ctx.fillStyle = '#b45309';
@@ -858,7 +944,7 @@
       raf = 0;
       if (!visible || document.hidden || still) return;
       var dt = Math.min((now - last) / 1000, 0.05); last = now;
-      step(dt); draw(); raf = requestAnimationFrame(loop);
+      clock += dt; step(dt); draw(); raf = requestAnimationFrame(loop);
     }
     function start() { if (!raf && !still) { last = performance.now(); raf = requestAnimationFrame(loop); } }
     resize(); populate(); for (var n = 0; n < 40; n++) step(0.05); draw(); start();
@@ -879,7 +965,7 @@
     box.setAttribute('style', 'position:fixed;right:12px;top:72px;z-index:50;width:220px;max-width:calc(100vw - 24px);background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 12px 32px -12px rgba(17,24,39,.35);padding:14px 16px;font:13px/1.4 Inter,system-ui,sans-serif;color:#111827');
     var out = document.createElement('p');
     out.setAttribute('style', 'margin:10px 0 0;font:12px/1.5 ui-monospace,Menlo,monospace;color:#4b5563;max-width:none');
-    var defs = [['speed', 'Speed', 0, 4, 0.1], ['count', 'Number of koi', 1, 14, 1], ['size', 'Size', 0.6, 2, 0.05], ['opacity', 'Opacity', 0.1, 1, 0.05]];
+    var defs = [['speed', 'Speed', 0, 4, 0.1], ['count', 'Number of koi', 1, 14, 1], ['size', 'Size', 0.6, 2, 0.05], ['vary', 'Size variation', 0, 1, 0.05], ['shimmer', 'Shimmer', 0, 1, 0.05], ['opacity', 'Opacity', 0.1, 1, 0.05]];
     function show() { out.textContent = 'koi ' + defs.map(function (d) { return d[0] + ' ' + P[d[0]]; }).join(', '); }
     var t = document.createElement('strong'); t.textContent = 'Koi pond'; box.appendChild(t);
     defs.forEach(function (d) {
