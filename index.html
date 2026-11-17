@@ -31,6 +31,7 @@
     --panel: #f9fafb;
     --accent: #1e3a5f;
     --accent-2: #2563eb;
+    --amber: #b45309;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -85,9 +86,8 @@
   @media (max-width: 420px) { nav .logo { display: none; } nav ul { gap: 16px; } }
 
   .hero { padding: 96px 0 56px; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: center; }
-  .hero::before { content: ""; position: absolute; left: 50%; width: 100vw; transform: translateX(-50%); top: -40px; height: 460px; z-index: -1;
-    background: radial-gradient(60% 70% at 15% 20%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 70%),
-                radial-gradient(50% 60% at 85% 10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%); }
+  .hero-field { position: absolute; left: 50%; top: -40px; width: 100vw; height: calc(100% + 40px); transform: translateX(-50%); z-index: -1; pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent); mask-image: linear-gradient(to bottom, #000 60%, transparent); }
   .headshot { width: 200px; height: 200px; border-radius: 16px; object-fit: cover; background: var(--panel); border: 1px solid var(--line); }
   @media (max-width: 640px) { .hero { grid-template-columns: minmax(0, 1fr); } .headshot { width: 160px; height: 160px; order: -1; } }
   .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-2); margin: 0 0 14px; }
@@ -130,7 +130,7 @@
   @media (max-width: 560px) { .case dl { grid-template-columns: 1fr; gap: 2px; } .case dt { margin-top: 10px; } }
 
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip { border: 1px solid var(--line); border-radius: 6px; padding: 5px 12px; font-size: 14px; color: var(--muted); }
+  .chip { border: 1px solid var(--line); border-radius: 8px; padding: 5px 12px; font-size: 14px; color: var(--muted); }
 
   .js .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
   .js .reveal.in { opacity: 1; transform: none; }
@@ -176,9 +176,6 @@
   .misa-stats li { background: rgba(252,252,255,.07); border: 1px solid rgba(167,214,255,.22); border-radius: 18px; padding: 18px 16px 16px; }
   .misa-stats b { display: block; font-family: Poppins, system-ui, sans-serif; font-weight: 900; font-size: clamp(34px, 5vw, 46px); line-height: 1; letter-spacing: -.03em; color: #A7D6FF; margin-bottom: 10px; }
   .misa-stats span { display: block; font-size: 16px; line-height: 1.4; color: #FCFCFF; }
-  .misa-points { margin: 0 0 36px; padding-left: 22px; font-size: 17px; line-height: 1.6; color: #FCFCFF; max-width: 62ch; }
-  .misa-points li { margin-bottom: 10px; }
-  .misa-points li::marker { color: #A7D6FF; }
   .misa figure { margin: 0; }
   .misa-collage { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; padding: 6px; }
   .misa-tile { position: relative; margin: 0; border: 4px solid #FCFCFF; border-radius: 16px; overflow: hidden; background: #1B2296;
@@ -201,7 +198,7 @@
     .misa-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
     .misa-stats li { padding: 14px 12px; }
     .misa-stats b { font-size: 34px; }
-    .misa-points { font-size: 16px; padding-left: 20px; }
+    .misa-note { font-size: 16px; }
     .misa-collage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 4px; }
     .misa-tile { border-radius: 14px; }
     .t-org, .t-evt { grid-column: span 2; grid-row: auto; aspect-ratio: 3 / 2; }
@@ -212,6 +209,33 @@
     .misa-tile:hover { transform: none; }
   }
   nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Pull quote: the porter week */
+  .pull { position: relative; margin: 28px 0 0; padding: 30px 32px 30px 76px; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px; }
+  .pull::before { content: "\201C"; position: absolute; left: 24px; top: 14px; font-size: 76px; line-height: 1; font-weight: 700; color: var(--amber); font-family: Georgia, "Times New Roman", serif; }
+  .pull p { margin: 0; max-width: 30em; font-size: clamp(19px, 2.5vw, 24px); line-height: 1.45; font-weight: 500; color: var(--ink); letter-spacing: -.005em; }
+  .pull strong { color: var(--amber); font-weight: 700; }
+  @media (max-width: 560px) { .pull { padding: 58px 22px 24px; } .pull::before { left: 20px; top: 8px; font-size: 64px; } }
+
+  /* Case study cards: the number leads */
+  .cases-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+  @media (max-width: 720px) { .cases-grid { grid-template-columns: minmax(0, 1fr); } }
+  .cases-grid .case { margin-bottom: 0; }
+  .case .big { margin: 0 0 6px; font-size: clamp(38px, 5.4vw, 50px); line-height: 1; font-weight: 700; letter-spacing: -.03em; color: var(--amber); }
+  .case .big-label { margin: 0 0 18px; font-size: 14px; font-weight: 500; color: var(--muted); }
+  .case h3 { margin-bottom: 8px; }
+  .case .sum { margin: 0; font-size: 15px; }
+  .case details { margin-top: 8px; }
+  .case summary { display: inline-block; cursor: pointer; padding: 12px 0; min-height: 44px; line-height: 20px; font-size: 14px; font-weight: 600; color: var(--accent); list-style: none; }
+  .case summary::-webkit-details-marker { display: none; }
+  .case summary::after { content: " +"; }
+  .case details[open] summary::after { content: " \2212"; }
+  .case summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .case summary:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; border-radius: 4px; }
+  .case details dl { grid-template-columns: 1fr; gap: 2px; padding-top: 4px; }
+  .case details dt { margin-top: 10px; }
+  .case details dt:first-child { margin-top: 0; }
+  .misa-note { margin: 0 0 36px; font-size: 17px; line-height: 1.6; color: #FCFCFF; max-width: 62ch; }
 </style>
 </head>
 <body>
@@ -233,6 +257,7 @@
 <main class="wrap" id="top">
 
   <header class="hero reveal">
+    <canvas class="hero-field" aria-hidden="true"></canvas>
     <div>
     <p class="eyebrow">Business Analyst · Process Improvement</p>
     <h1>Victor Yu</h1>
@@ -257,15 +282,16 @@
   <section id="about" class="reveal">
     <h2>About</h2>
     <p>
-      I like finding the slow, manual parts of how work gets done. Over two co-op terms I've worked on both
-      sides of that: placing orders and counting shelves in a biotech lab, then mapping processes and rolling
-      out automations at a health authority.
+      I like finding the slow, manual parts of how work gets done. Two co-ops put me on both sides of it:
+      counting shelves in a biotech lab, then rolling out automations at a health authority.
     </p>
-    <p>
-      During the BC nurses' strike I spent a week as a porter at Vancouver General Hospital. Pushing patients
-      through halls I had only seen on a screen changed how I think about the systems I build. The people using
-      them are the point.
-    </p>
+    <blockquote class="pull">
+      <p>
+        During the BC nurses' strike I spent a week as a porter at Vancouver General Hospital. Pushing patients
+        through halls I had only seen on a screen changed how I think about the systems I build.
+        <strong>The people using them are the point.</strong>
+      </p>
+    </blockquote>
   </section>
 
   <section id="experience" class="reveal">
@@ -275,11 +301,10 @@
       <h3>Business Analyst Co-op, Vancouver Coastal Health</h3>
       <p class="meta">May 2026 to September 2026 · Data &amp; Analytics, Process Improvement</p>
       <ul class="points">
-        <li>Rolled out a LearningHub compliance automation across six departments. See the case study below.</li>
-        <li>Tested an invoice processing automation, cutting manual processing time by an estimated 80%. See the case study below.</li>
-        <li>Wrote submission and approval guides for a new mileage and parking reimbursement process, helping cut processing time by 60%.</li>
-        <li>Built an org-wide Copilot resource with a version-controlled library of 40+ role-based prompts.</li>
-        <li>Led discovery and process mapping for new automation projects, halving the time to document as-is processes.</li>
+        <li>Rolled out a compliance automation across six departments and tested an invoice automation. Both are case studies below.</li>
+        <li>Wrote the guides for a new mileage and parking reimbursement process, helping cut processing time by 60%.</li>
+        <li>Built an org-wide Copilot library of 40+ role-based prompts.</li>
+        <li>Led process mapping for new automation projects, halving the time to document as-is processes.</li>
       </ul>
     </div>
 
@@ -287,9 +312,9 @@
       <h3>Procurement Co-op, SignalChem Biotech</h3>
       <p class="meta">September 2025 to April 2026 · Richmond, BC</p>
       <ul class="points">
-        <li>Ran procurement for 6 lab teams, processing 400+ purchase requests with researchers, logistics and vendors.</li>
-        <li>Analyzed 557 international shipments and identified nearly $40K in potential savings from switching carriers to DHL. The switch went ahead and actual savings are already coming in. See the case study below.</li>
-        <li>Negotiated discounts on 80% of purchases and standardized purchase order documentation.</li>
+        <li>Ran procurement for 6 lab teams, processing 400+ purchase requests.</li>
+        <li>Found nearly $40K in potential shipping savings. Case study below.</li>
+        <li>Negotiated discounts on 80% of purchases.</li>
         <li>Rebuilt the inventory room with an 8-step shelf count and reorder points that keep 3 months of critical supplies on hand.</li>
       </ul>
     </div>
@@ -297,58 +322,79 @@
 
   <div class="band"><section id="cases" class="reveal">
     <h2>Case studies</h2>
-
+    <div class="cases-grid">
     <article class="case">
+      <p class="big">5,000+</p>
+      <p class="big-label">staff tracked across 6 departments</p>
       <p class="org">Vancouver Coastal Health · Automation</p>
-      <p class="outcome">5,000+ staff · 6 departments</p>
       <h3>LearningHub compliance automation</h3>
-      <dl>
-        <dt>Problem</dt><dd>Six departments had to track mandatory training for 5,000+ staff across 1,000+ courses.</dd>
-        <dt>Approach</dt><dd>I owned the rollout from discovery through hypercare. I mapped as-is and to-be processes as Visio swim lanes, set up monthly compliance reporting for department leads, and wrote the user manual and handover agreement so the business can run it without developer support.</dd>
-        <dt>Result</dt><dd>Compliance is tracked automatically across six departments, and the solution was formally handed over to the business.</dd>
-      </dl>
+      <p class="sum">Mandatory training across 1,000+ courses, now tracked automatically and run by the business.</p>
+      <details>
+        <summary>Read more</summary>
+        <dl>
+          <dt>Problem</dt><dd>Six departments had to track mandatory training for 5,000+ staff across 1,000+ courses.</dd>
+          <dt>Approach</dt><dd>I owned the rollout from discovery through hypercare. I mapped as-is and to-be processes as Visio swim lanes, set up monthly compliance reporting for department leads, and wrote the user manual and handover agreement so the business can run it without developer support.</dd>
+          <dt>Result</dt><dd>Compliance is tracked automatically across six departments, and the solution was formally handed over to the business.</dd>
+        </dl>
+      </details>
       <p class="stack">RPA · Excel · Visio · SharePoint</p>
     </article>
 
     <article class="case">
+      <p class="big">~80%</p>
+      <p class="big-label">less manual invoice processing, estimated</p>
       <p class="org">Vancouver Coastal Health · Testing</p>
-      <p class="outcome">~80% less manual processing</p>
       <h3>Invoice processing automation testing</h3>
-      <dl>
-        <dt>Problem</dt><dd>An automated invoice model had to be tested before it could be trusted at scale.</dd>
-        <dt>Approach</dt><dd>I reviewed 1,200+ invoices against the model's output and built a test tracker to log errors, spot patterns and find root causes. Results for the facilities category went into retraining the model. I also ran check-ins with teammates and showed them how to document edge cases consistently.</dd>
-        <dt>Result</dt><dd>An estimated 80% cut in manual processing time, and better training data for the next version.</dd>
-      </dl>
+      <p class="sum">I checked 1,200+ invoices against an automated model so it could be trusted at scale.</p>
+      <details>
+        <summary>Read more</summary>
+        <dl>
+          <dt>Problem</dt><dd>An automated invoice model had to be tested before it could be trusted at scale.</dd>
+          <dt>Approach</dt><dd>I reviewed 1,200+ invoices against the model's output and built a test tracker to log errors, spot patterns and find root causes. Results for the facilities category went into retraining the model. I also ran check-ins with teammates and showed them how to document edge cases consistently.</dd>
+          <dt>Result</dt><dd>An estimated 80% cut in manual processing time, and better training data for the next version.</dd>
+        </dl>
+      </details>
       <p class="stack">Excel · PivotTables</p>
     </article>
 
     <article class="case">
+      <p class="big">~$40K</p>
+      <p class="big-label">in potential shipping savings</p>
       <p class="org">SignalChem Biotech · Analysis</p>
-      <p class="outcome">~$40K potential savings</p>
       <h3>Carrier cost analysis</h3>
-      <dl>
-        <dt>Problem</dt><dd>International shipping went through UPS and FedEx with no clear cost comparison.</dd>
-        <dt>Approach</dt><dd>I analyzed 557 international shipments in Excel, compared carrier rates and modeled the cost of switching to DHL.</dd>
-        <dt>Result</dt><dd>Nearly $40,000 in potential savings identified. The switch to DHL went ahead, and actual savings are already coming in.</dd>
-      </dl>
+      <p class="sum">I analyzed 557 international shipments and modeled a switch to DHL. The switch went ahead.</p>
+      <details>
+        <summary>Read more</summary>
+        <dl>
+          <dt>Problem</dt><dd>International shipping went through UPS and FedEx with no clear cost comparison.</dd>
+          <dt>Approach</dt><dd>I analyzed 557 international shipments in Excel, compared carrier rates and modeled the cost of switching to DHL.</dd>
+          <dt>Result</dt><dd>Nearly $40,000 in potential savings identified. The switch to DHL went ahead, and actual savings are already coming in.</dd>
+        </dl>
+      </details>
       <p class="stack">Excel</p>
     </article>
 
     <article class="case">
-      <p class="org">SFU Business Analytics Hackathon · 3rd place</p>
-      <p class="outcome">~$102M projected savings</p>
+      <p class="big">~$102M</p>
+      <p class="big-label">in projected savings</p>
+      <p class="org">SFU Business Analytics Hackathon · 3rd of 21 teams</p>
       <h3>BC Hydro supply chain resilience</h3>
-      <dl>
-        <dt>Problem</dt><dd>How exposed is BC Hydro's supply chain to tariffs and supplier risk?</dd>
-        <dt>Approach</dt><dd>We simulated a 25% tariff across supply categories and analyzed supplier locations, lead times and geopolitical risk in Excel and Tableau. We found a 207% rise in U.S. imports from 2021 to 2024 and recommended sourcing switchgear from Germany and diversifying with 200+ Canadian suppliers.</dd>
-        <dt>Result</dt><dd>About $102M in projected savings and 3rd place overall out of 21 teams.</dd>
-      </dl>
+      <p class="sum">We simulated a 25% tariff on BC Hydro's supply chain and recommended where to re-source.</p>
+      <details>
+        <summary>Read more</summary>
+        <dl>
+          <dt>Problem</dt><dd>How exposed is BC Hydro's supply chain to tariffs and supplier risk?</dd>
+          <dt>Approach</dt><dd>We simulated a 25% tariff across supply categories and analyzed supplier locations, lead times and geopolitical risk in Excel and Tableau. We found a 207% rise in U.S. imports from 2021 to 2024 and recommended sourcing switchgear from Germany and diversifying with 200+ Canadian suppliers.</dd>
+          <dt>Result</dt><dd>About $102M in projected savings and 3rd place overall out of 21 teams.</dd>
+        </dl>
+      </details>
       <figure>
         <img src="images/hackathon-bchydro.jpg" alt="Victor Yu's team presenting their BC Hydro supply chain analysis on stage at the SFU Business Analytics Hackathon" width="1400" height="349" loading="lazy">
         <figcaption>Presenting our BC Hydro analysis at the hackathon.</figcaption>
       </figure>
       <p class="stack">Excel · Tableau</p>
     </article>
+    </div>
   </section></div>
 
   <section id="leadership" class="reveal">
@@ -367,12 +413,7 @@
         <li><b>250+</b><span>students connected with 80 industry professionals</span></li>
         <li><b>$5K</b><span>in event funding, a 25% increase</span></li>
       </ul>
-      <ul class="misa-points">
-        <li>Oversee 10 directors and their teams in a club of 60+ members running four flagship events.</li>
-        <li>Pitched the club's plan to SFU Beedie and secured up to $5,000 in event funding, a 25% increase.</li>
-        <li>Connected 250+ students with 80 industry professionals through networking nights, panels, workshops and hackathons, including PMBC 2026.</li>
-        <li>Built onboarding for new directors, including role documents for Corporate Relations and Strategy.</li>
-      </ul>
+      <p class="misa-note">I pitched the club's plan to SFU Beedie to win that funding, and built onboarding for new directors, including role documents for Corporate Relations and Strategy.</p>
       <figure>
         <div class="misa-collage">
           <div class="misa-tile t-org"><img src="images/pmbc-organizers.jpg" alt="Victor Yu, second from left in a white shirt and striped tie, with three other organizers under silver PMBC balloons" width="1400" height="933" loading="lazy"></div>
@@ -390,8 +431,8 @@
       <p class="meta">Fall 2026 · SFU Beedie School of Business</p>
       <p>
         Professor Jason Ho invited four senior business students, including me, to speak to his BUS 300 class of about
-        300 students about co-op, case competitions, clubs and the move into upper-division courses. Our main advice
-        was not to chase an opportunity just because everyone else is. Take time to work out what you actually want.
+        300 students. Our main advice was not to chase an opportunity just because everyone else is. Take time to work
+        out what you actually want.
       </p>
       <figure>
         <img src="images/bus300-panel.jpg" alt="Victor Yu, second from left in glasses and a black shirt, standing with three other senior students at the front of the lecture hall during the BUS 300 peer panel" width="900" height="600" loading="lazy">
@@ -448,6 +489,82 @@
       });
     }, { threshold: 0.12 });
     els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
+<script>
+  /* Hero dot grid. Decorative only. Open the page with ?tweak to tune it. */
+  (function () {
+    var cv = document.querySelector('.hero-field');
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+    var P = { spacing: 26, speed: 1, opacity: 0.5, size: 1.6, chars: 0.12, wave: 1 };
+    var GLYPHS = '+:/<>01{}=*#';
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var w = 0, h = 0, t = 0, last = 0, visible = true, raf = 0;
+    function hash(i, j) { var n = Math.sin(i * 127.1 + j * 311.7) * 43758.5453; return n - Math.floor(n); }
+    function resize() {
+      var r = cv.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
+      w = r.width; h = r.height; cv.width = Math.round(w * d); cv.height = Math.round(h * d);
+      ctx.setTransform(d, 0, 0, d, 0, 0);
+    }
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      var sp = P.spacing * (w < 640 ? 1.15 : 1), k = 0.011 * P.wave;
+      ctx.font = '600 ' + Math.round(sp * 0.46) + 'px ui-monospace, Menlo, Consolas, monospace';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      for (var j = 0, y = sp / 2; y < h; y += sp, j++) {
+        for (var i = 0, x = sp / 2; x < w; x += sp, i++) {
+          var v = (Math.sin(x * k + y * k * 0.6 + t) + Math.sin(x * k * 0.45 - y * k * 1.3 + t * 0.7)) / 4 + 0.5;
+          var a = P.opacity * (0.12 + 0.5 * v * v);
+          var r = hash(i, j);
+          if (r < P.chars) {
+            ctx.fillStyle = 'rgba(30,58,95,' + Math.min(a * 1.25, 1).toFixed(3) + ')';
+            ctx.fillText(GLYPHS.charAt(Math.floor(hash(j, i) * GLYPHS.length)), x, y);
+          } else {
+            ctx.fillStyle = 'rgba(37,99,235,' + a.toFixed(3) + ')';
+            ctx.beginPath(); ctx.arc(x, y, P.size * (0.55 + 0.75 * v), 0, 6.2832); ctx.fill();
+          }
+        }
+      }
+    }
+    function loop(now) {
+      raf = 0;
+      if (!visible || document.hidden || still) return;
+      if (now - last > 32) { t += Math.min(now - last, 100) * 0.0004 * P.speed; last = now; draw(); }
+      raf = requestAnimationFrame(loop);
+    }
+    function start() { if (!raf && !still) { last = performance.now(); raf = requestAnimationFrame(loop); } }
+    resize(); draw(); start();
+    window.addEventListener('resize', function () { resize(); draw(); });
+    document.addEventListener('visibilitychange', start);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) { visible = e[0].isIntersecting; if (visible) start(); }).observe(cv);
+    }
+
+    if (!/[?&]tweak\b/.test(location.search)) return;
+    var defs = [
+      ['spacing', 'Density (gap between dots)', 14, 48, 1],
+      ['speed', 'Speed', 0, 4, 0.1],
+      ['opacity', 'Opacity', 0, 1, 0.01],
+      ['size', 'Dot size', 0.5, 4, 0.1],
+      ['chars', 'Share of characters', 0, 0.6, 0.01],
+      ['wave', 'Wave size (lower is wider)', 0.2, 3, 0.1]
+    ];
+    var box = document.createElement('div');
+    box.setAttribute('style', 'position:fixed;right:12px;bottom:12px;z-index:50;width:250px;max-width:calc(100vw - 24px);background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 12px 32px -12px rgba(17,24,39,.35);padding:14px 16px;font:13px/1.4 Inter,system-ui,sans-serif;color:#111827');
+    var out = document.createElement('p');
+    out.setAttribute('style', 'margin:10px 0 0;font:12px/1.5 ui-monospace,Menlo,monospace;color:#4b5563;word-break:break-word;max-width:none');
+    function show() { out.textContent = defs.map(function (d) { return d[0] + ' ' + P[d[0]]; }).join(', '); }
+    var title = document.createElement('strong'); title.textContent = 'Hero dot grid'; box.appendChild(title);
+    defs.forEach(function (d) {
+      var lab = document.createElement('label'); lab.setAttribute('style', 'display:block;margin-top:10px');
+      var name = document.createElement('span'); name.textContent = d[1]; name.style.display = 'block';
+      var inp = document.createElement('input'); inp.type = 'range'; inp.min = d[2]; inp.max = d[3]; inp.step = d[4]; inp.value = P[d[0]];
+      inp.setAttribute('style', 'width:100%;margin:2px 0 0');
+      inp.addEventListener('input', function () { P[d[0]] = parseFloat(inp.value); show(); draw(); });
+      lab.appendChild(name); lab.appendChild(inp); box.appendChild(lab);
+    });
+    box.appendChild(out); show(); document.body.appendChild(box);
   })();
 </script>
 </body>
